@@ -2,11 +2,11 @@
 
 1. 部门表（
 	部门名 varchar<20>，
-	部长 varchar<20>，
+	部长 int，
 	上级部门 varchar<20>）
 
 2. 岗位表（
-	岗位号 char<3>，
+	岗位号 int，
 	职业名称 varchar<15>，
 	部门名 varchar<20>，
 	所需人数 int，
@@ -14,7 +14,8 @@
 	薪酬 int）
 
 3. 员工信息表（
-	员工号 char<6>，
+	员工号 int，
+	密码 varchar<20>,
 	姓名 varchar<20>，
 	年龄 int，
 	性别 enum<'男','女'>，
@@ -30,11 +31,11 @@
 	试用期薪酬 int，
 	起始日期 date，
 	截止日期 date，
-	员工号 char<6>，
-	岗位号 char<3>）
+	员工号 int，
+	岗位号 int）
 
 5. 调动表（
-	员工号 char<6>，
+	员工号 int，
 	调动前岗位 char<3>，
 	调动后岗位 char<3>，
 	调动前部门 char<20>，
@@ -43,15 +44,15 @@
 	备注 varchar<100>）
 
 6. 入职表（
-	员工号 char<6>，
+	员工号 int，
 	入职时间 date，
-	岗位号 char<3>，
+	岗位号 int，
 	入职部门 char<20>）
 
 7. 离职表（
-	员工号 char<6>，
+	员工号 int，
 	离职时间 date，
-	岗位号 char<3>，
+	岗位号 int，
 	原因 varchar<100>）
 
 
