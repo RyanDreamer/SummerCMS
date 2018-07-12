@@ -1,11 +1,10 @@
 /**
 *描述：此为数据库的生成SQL语句
-*版本：1.2
+*版本：1.3
 *仍保留的问题：
 *  1.对各字段的限制条件有待商榷。
 *对原表做的改动：
-*  修改了一些属性名使与Java代码相同
-*  修改了调动表的主码为员工号加日期
+*  增加级联的外码限制
 **/
 
 
@@ -18,7 +17,7 @@ create table if not exists Dept (
     name varchar(20) comment '部门名' primary key,
     minister int comment '部长' unique,
     sdept varchar(20) comment '上级部门',
-    foreign key (sdept) references dept(name)
+    foreign key (sdept) references dept(name) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 /*岗位表*/
@@ -30,7 +29,7 @@ create table if not exists Job (
     countReal int not null comment '实际人数',
     salary int not null comment '薪酬',
     
-    foreign key (dept) references dept(name)
+    foreign key (dept) references dept(name) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 /*员工信息表*/
@@ -56,8 +55,8 @@ create table if not exists PCon (
     eid int not null unique comment '员工号',
     jid int not null comment '岗位号',
     
-    foreign key (eid) references employeeInfo(eid),
-    foreign key (jid) references job(jid)
+    foreign key (eid) references employeeInfo(eid) ON DELETE CASCADE ON UPDATE CASCADE,
+    foreign key (jid) references job(jid) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 /*调动表*/
@@ -71,11 +70,11 @@ create table if not exists PTrans (
     PS varchar(100) comment '备注',
     
     primary key (eid, `date`),
-    foreign key (eid) references employeeInfo(eid),
-    foreign key (prejob) references job(jid),
-    foreign key (nextjob) references job(jid),
-    foreign key (predept) references dept(name),
-    foreign key (nextdept) references dept(name)
+    foreign key (eid) references employeeInfo(eid) ON DELETE CASCADE ON UPDATE CASCADE,
+    foreign key (prejob) references job(jid) ON DELETE CASCADE ON UPDATE CASCADE,
+    foreign key (nextjob) references job(jid) ON DELETE CASCADE ON UPDATE CASCADE,
+    foreign key (predept) references dept(name) ON DELETE CASCADE ON UPDATE CASCADE,
+    foreign key (nextdept) references dept(name) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 /*入职表*/
