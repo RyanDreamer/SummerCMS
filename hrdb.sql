@@ -43,7 +43,8 @@ create table if not exists EmployeeInfo (
     experience int comment '职业从事年数',
     education varchar(10) comment '学历',
     cet4 enum('yes', 'no') comment '英语四级',
-    family int comment '家庭成员人数'
+    family int comment '家庭成员人数',
+    password varchar(20) comment '密码'
 );
 
 /*试用期合同表*/
