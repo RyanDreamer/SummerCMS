@@ -1,10 +1,10 @@
 /**
 *描述：此为数据库的生成SQL语句
-*版本：1.3
+*版本：1.4
 *仍保留的问题：
 *  1.对各字段的限制条件有待商榷。
 *对原表做的改动：
-*  增加级联的外码限制
+*  修改调动表的主码为eid
 **/
 
 
@@ -62,7 +62,7 @@ create table if not exists PCon (
 
 /*调动表*/
 create table if not exists PTrans (
-    eid int comment '员工号',
+    eid int primary key comment '员工号',
     preJob int not null comment '调动前岗位',
     nextJob int not null comment '调动后的岗位',
     preDept char(20) not null comment '调动前部门',
@@ -70,7 +70,6 @@ create table if not exists PTrans (
     `date` date not null comment '日期',
     PS varchar(100) comment '备注',
     
-    primary key (eid, `date`),
     foreign key (eid) references employeeInfo(eid) ON DELETE CASCADE ON UPDATE CASCADE,
     foreign key (prejob) references job(jid) ON DELETE CASCADE ON UPDATE CASCADE,
     foreign key (nextjob) references job(jid) ON DELETE CASCADE ON UPDATE CASCADE,
